@@ -1,0 +1,65 @@
+package com.company;
+
+import java.util.*;
+
+class Node {
+    Node left;
+    Node right;
+    int data;
+
+    Node(int data) {
+        this.data = data;
+    }
+
+    //insert a data
+    void insert(int val) {
+        if (val <= data) {
+            if (left == null) {
+                left = new Node(val);
+            } else {
+                left.insert(val);
+            }
+        } else {
+            if (right == null) {
+                right = new Node(val);
+            } else {
+                right.insert(val);
+            }
+        }
+    }
+
+    // BFS 
+    void BFS(Node node) {
+        ArrayList<Integer> result = new ArrayList<>();
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(node);
+
+        while (!queue.isEmpty()) {
+            Node current = queue.remove();
+            result.add(current.data);
+            if (current.left != null) {
+                queue.add(current.left);
+            }
+            if (current.right != null) {
+                queue.add(current.right);
+            }
+        }
+
+        for (Integer i : result) {
+            System.out.println(i);
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Node node = new Node(6);
+        node.insert(3);
+        node.insert(8);
+        node.insert(1);
+        node.insert(4);
+        node.insert(7);
+        node.insert(9);
+        node.BFS(node);
+    }
+}
